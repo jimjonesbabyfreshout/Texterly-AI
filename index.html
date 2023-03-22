@@ -5,11 +5,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="index.css" />
+    <script
+      src="https://kit.fontawesome.com/b6dc2920d5.js"
+      crossorigin="anonymous"
+    ></script>
     <title>Texterly AI</title>
   </head>
   <body>
     <div class="container">
-      <textarea id="text-area" placeholder="Enter your text here"></textarea>
+      <div class="text-container">
+        <textarea id="text-area" placeholder="Enter your text here"></textarea>
+        <button id="copy-btn">Copy Text</button>
+        <div id="loading-spinner" class="hidden">
+          <i class="fas fa-spinner fa-spin"></i> Loading...
+        </div>
+      </div>
       <div class="button-container">
         <button type="button" id="process-btn" class="process-btn">
           Process
@@ -22,6 +32,7 @@
           <div class="word-title">Words</div>
           <p class="word-count" id="word-count">0</p>
         </div>
+        <button type="button" class="reset-btn" id="reset-btn">Reset</button>
       </div>
     </div>
   </body>

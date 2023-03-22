@@ -1,12 +1,19 @@
 import { apiKey } from "./config.js";
+
 const get = (id) => document.getElementById(id)
 const textAreaEl = get("text-area");
 const processBtn = get("process-btn");
 const characterCountEl = get("character-count")
-const wordCountEl = get("word-count") 
+const wordCountEl = get("word-count")
+const resetBtn = get("reset-btn")
+const copyBtn = get("copy-btn");
+const loadingSpinner = get("loading-spinner");
+
+// --------------------- Functions ----------------------------
 
 function editText() {
   if (textAreaEl.value) {
+    showLoadingSpinner();
     fetch("https://api.openai.com/v1/edits", {
       method: "POST",
       headers: {
@@ -23,7 +30,9 @@ function editText() {
     })
       .then((response) => response.json())
       .then((data) => {
+        hideLoadingSpinner()
         textAreaEl.value = data.choices[0].text
+        console.log(textAreaEl.value)
         countCharactersAndWords(textAreaEl.value);
       })
       .catch((error) => console.error(error));
@@ -50,6 +59,24 @@ function countCharactersAndWords(textarea) {
   wordCountEl.textContent = wordCount
 }
 
+function reset() {
+  characterCountEl.textContent = '0';
+  wordCountEl.textContent = '0';
+  textAreaEl.value = '';
+}
 
+function showLoadingSpinner() {
+  loadingSpinner.classList.remove("hidden");
+}
+
+function hideLoadingSpinner() {
+  loadingSpinner.classList.add("hidden");
+}
+
+// ------------------ Event Listeners --------------------------
 
 processBtn.addEventListener("click", editText);
+resetBtn.addEventListener('click', reset)
+copyBtn.addEventListener("click", function() {
+  navigator.clipboard.writeText(textAreaEl.value)
+});
