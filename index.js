@@ -24,7 +24,7 @@ function editText() {
         model: "text-davinci-edit-001",
         input: `${textAreaEl.value}`,
         instruction:
-          "Fix all of the grammar, always add the correct punctuation and always correct spelling mistakes. Do not go to the next line after making corrections to the input text.",
+          "Fix all of the grammar, always add the correct punctuation and always correct spelling mistakes.",
         n: 1,
         temperature: 0.2,
       }),
