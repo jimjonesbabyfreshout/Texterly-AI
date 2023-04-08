@@ -1,5 +1,4 @@
-// import { apiKey } from "./config.js";
-const apiKey = process.env.API_KEY;
+import { apiKey } from "./config.js";
 
 const get = (id) => document.getElementById(id);
 const textAreaEl = get("text-area");
